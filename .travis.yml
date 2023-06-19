@@ -5,5 +5,14 @@ services:
 before_install:
   - docker build -t privoas/docker-react:latest -f Dockerfile.dev .
 
-scripts:
-  - docker run -e CI=true privoas/docker-react:latest npm run test
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "docker-react"
+  env: "Docker-react-env"
+  bucket_name: "elasticbeanstalk-us-east-1-208435390522"
+  bucket_path: "docker-react"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
