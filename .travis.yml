@@ -5,6 +5,9 @@ services:
 before_install:
   - docker build -t privoas/docker-react:latest -f Dockerfile.dev .
 
+scripts:
+  - docker run -e CI=true privoas/docker-react:latest npm run test
+
 deploy:
   provider: elasticbeanstalk
   region: "us-east-1"
